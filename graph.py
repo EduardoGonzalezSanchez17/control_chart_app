@@ -4,8 +4,12 @@ import plotly.graph_objects as go
 import re 
 from pathlib import Path
 
+
+
 st.sidebar.image("https://www.aftermarket.astemo.com/americas/en/ourbusiness/assets/img/A_Logo_Red.png", width="stretch")
 #st.sidebar.image("https://www.aftermarket.astemo.com/apac/en/assets/img/ourbusiness/img_container_03.png", width="stretch")
+
+
 # -----------------------------------
 # Load data
 # -----------------------------------
@@ -18,7 +22,30 @@ uploaded_file = st.sidebar.file_uploader(
 
 if uploaded_file is None:
     st.info("Please select an Excel file to continue.")
+
+intro_placeholder = st.empty()
+
+if uploaded_file is None:
+    intro_placeholder.markdown(
+        """
+        <div style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px;
+        ">
+            <img src="https://www.aftermarket.astemo.com/americas/en/ourbusiness/assets/img/A_Logo_Red.png"
+                 style="max-width: 220px;">
+            <p style="margin-top: 10px; font-size: 18px; font-weight: 600;">
+                BECM team
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
     st.stop()
+else:
+    intro_placeholder.empty()
 
 df = pd.read_csv(
     uploaded_file,
@@ -372,10 +399,18 @@ st.plotly_chart(fig, width="stretch")
 st.markdown(f"""
 ### Selection Summary
 
-- 🧬 **Model:** `{model}`  
-- 🎯 **Event:** `{event}`  
-- 📒 **Test Name:** `{test_selected}`  
-- 💻 **TCF:** `{tcf_selected}`  
-- 🧩 **Module Code:** `{product_selected}`  
-- 🏭 **Machine Code:** `{machine_selected}`  
+- **Model:** `{model}`  
+- **Event:** `{event}`  
+- **Test Name:** `{test_selected}`  
+- **TCF:** `{tcf_selected}`  
+- **Module Code:** `{product_selected}`  
+- **Machine Code:** `{machine_selected}`  
 """)
+
+
+st.divider()
+
+st.caption(
+    "BECM · PV 2-5 Data Analysis · v1.0"
+)
+
