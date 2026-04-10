@@ -666,11 +666,13 @@ with st.expander("Golden Plot Export", expanded=False):
     )
 
 
+
     # ---- TCF selector ----
     tcf_export = st.selectbox(
         "TCF for export",
-        sorted(df["TCF"].astype(str).unique()+["ALL"])
+        ["ALL"] + sorted(df["TCF"].astype(str).unique())
     )
+
 
 
     module_mode = st.radio(
